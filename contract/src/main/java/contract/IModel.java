@@ -11,20 +11,11 @@ import entity.HelloWorld;
  */
 public interface IModel {
 
-	/**
-	 * Gets the hello world.
-	 *
-	 * @return the helloworld entity
-	 */
-	HelloWorld getHelloWorld();
+	//Gets the map
+	public IMap getMap();
 
-	/**
-	 * Load the message.
-	 *
-	 * @param code
-	 *          the code
-	 */
-	void loadHelloWorld(String code);
+	//Gets the character
+	public IMobile getMyCharacter();
 
 	/**
 	 * Gets the observable.

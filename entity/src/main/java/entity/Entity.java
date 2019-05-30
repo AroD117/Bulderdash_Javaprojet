@@ -1,5 +1,7 @@
 package entity;
 
+import contract.IEntity;
+
 /**
  * The Class Entity.
  *

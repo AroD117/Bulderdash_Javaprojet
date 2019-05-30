@@ -1,5 +1,13 @@
 package entity;
 
-public class Permeability {
+public enum Permeability {
 
+	    /* The blocking */
+	    BLOCKING,
+	    
+	    /* The penetrable */
+	    PENETRABLE,
+	    
+	    /* The mineable */
+	    MINEABLE;
 }

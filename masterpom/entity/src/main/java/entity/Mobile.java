@@ -1,119 +1,83 @@
 package entity;
 
 import java.awt.Point;
-import fr.exia.insanevehicles.model.IMap;
-import fr.exia.insanevehicles.model.IRoad;
-import fr.exia.insanevehicles.model.element.Permeability;
-import fr.exia.insanevehicles.model.element.Sprite;
+
 
 	public abstract class Mobile extends Entity implements IMobile{
-		
-		/* The points x and y */
 	    private Point position;
-
-	    /* The alive */
 	    private Boolean alive = true;
-	    
-	    /* The map */
 	    private IMap map;
 	    
-	    /**
-	     * Instantiates a new mobile.
-	     *
-	     * @param sprite
-	     *            the sprite
-	     * @param map
-	     *            the map
-	     * @param permeability
-	     *            the permeability
-	     */
-	    
-	    Mobile(final Sprite sprite, final IMap map, final Permeability permeability) {
+	public Mobile(final Sprite sprite, final IMap map, final Permeability permeability) {
 			super(sprite, permeability);
 			this.map = map;
 			this.position = new Point();
 		}
-	    
 
-	    /**
-	     * Instantiates a new mobile.
-	     *
-	     * @param x
-	     *            the x
-	     * @param y
-	     *            the y
-	     * @param sprite
-	     *            the sprite
-	     * @param map
-	     *            the map
-	     * @param permeability
-	     *            the permeability
-	     */
-	    Mobile(final int x, final int y, final Sprite sprite, final IMap map, final Permeability permeability) {
+	public Mobile(final int x, final int y, final Sprite sprite, final IMap map, final Permeability permeability) {
 	        this(sprite, map, permeability);
-	        this.setX(x);
-	        this.setY(y);
+	        this.getPosition().x=x;
+	        this.getPosition().y=y;
 	        
 	    }
 	    
-	    @Override
-		public void moveUp() {
-			this.setY(this.getY() - 1);
-			this.setHasMoved();
+	public int GetX() {
+		return this.getPosition().x;
+	}
+	
+	public void SetX(int x) {
+		this.getPosition().x = x;
+        if (this.isCrashed()) {
+            this.die();
+	}
+	
+	public int GetY() {
+		return this.getPosition().y;
+	}
+	
+	public void SetY(int y) {
+		this.getPosition().y = y;
+	    if (this.isCrashed()) {
+	    this.die();
+	}
+	     
+	public void moveUp() {
+		this.setY(this.getY() - 1);
+		this.setHasMoved();
 
 	}
 	    
-	    @Override
 		public void moveDown() {
 			  this.setY(this.getY() + 1);
 		      this.setHasMoved();
 
 	}
 
-	    @Override
 		public void moveLeft() {
 			 this.setX(this.getX() - 1);
 		     this.setHasMoved();
 		
 	}
 	   
-
-	    @Override
 		public void moveRight() {
 			this.setX(this.getX() + 1);
 	        this.setHasMoved();
 	}
 	    
-	   
-	    @Override
 		public void DoNothing() {
 			this.setHasMoved();
 		}
 
+		public Point getPosition() {
+	        return position;
+	    }
+		
+		public void setPosition(final Point position) {
+	        this.position = position;
+	    }
+		
 		private  void SetHasMoved() {
 			this.getMap().setMobileHasChanged();
-		}
-		
-		@Override
-		public int GetX() {
-			return this.getPosition().x;
-		}
-		
-		public void SetX(int x) {
-			this.getPosition().x = x;
-	        if (this.isCrashed()) {
-	            this.die();
-		}
-		
-	    @Override
-		public int GetY() {
-			return this.getPosition().y;
-		}
-		
-		public void SetY(int y) {
-			   this.getPosition().y = y;
-		       if (this.isCrashed()) {
-		       this.die();
 		}
 		       
 		public IMap getMap() {
@@ -124,10 +88,10 @@ import fr.exia.insanevehicles.model.element.Sprite;
 	        this.map = map;
 	    }
 		
-		@Override
 		public boolean isAlive() {
 			 return this.alive;
 		}
+		
 		
 		public void Die() {
 			 this.alive = false;
@@ -135,58 +99,46 @@ import fr.exia.insanevehicles.model.element.Sprite;
 		}
 		
 		public boolean isCrashed() {
-			return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.BLOCKING;
+			for (IMobile mobEntity: this.getMap().getmobEntity()) {
+				if (mobEntity.getSprite().getCharImage() == 'O' || mobEntity.getSprite().getCharImage() == 'V') {
+					if (mobEntity.getPosition().x == this.getPosition().x	&& mobEntity.getPosition().y == this.getPosition().y - 1 && mEntity.isFalling()) {
+						return true;
+					}
+				}
+			}
+			return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == PERMEABILITY.BLOCKING;
 		}
 		
-		/*public boolean isWon() {
-			return true;
-		}
+		public void remove()  {
+			this.setPosition(new Point(-1, 1));
+			this.getMap().getmEntity().remove(this);
+			}
 		
-		public boolean isBlocked() {
-			return true;
-		}
+		public boolean canMove(ControllerOrder choice) {
+			return this.mapAllowsMvt(choice)&&this.entityAllowsmvt(choice);
 		
-		public boolean isLootable() {
-			return true;
-		}
-		
-		public boolean isDesappear() {
-			return true;
-		}*/
-		
-		public Point getPosition() {
-	        return this.position;
-	    }
-		
-		public void setPosition(final Point position) {
-	        this.position = position;
-	    }
 		
 		protected boolean mapAllowsMovementTo(final UserOrder direction) {
 			switch (direction) {
 			case UP:
-				return this.getMap().getOnTheMapXY(this.getX(), this.getY() - 1)
-						.getPermeability() == Permeability.PENETRABLE;
+				return this.getMap().getOnTheMapXY(this.getX(), this.getY() - 1).getPermeability() == Permeability.PENETRABLE;
 			case DOWN:
-				return this.getMap().getOnTheMapXY(this.getX(), this.getY() + 1)
-						.getPermeability() == Permeability.PENETRABLE;
+				return this.getMap().getOnTheMapXY(this.getX(), this.getY() + 1).getPermeability() == Permeability.PENETRABLE;
 			case RIGHT:
-				return this.getMap().getOnTheMapXY(this.getX() + 1, this.getY())
-						.getPermeability() == Permeability.PENETRABLE;
+				return this.getMap().getOnTheMapXY(this.getX() + 1, this.getY()).getPermeability() == Permeability.PENETRABLE;
 			case LEFT:
-				return this.getMap().getOnTheMapXY(this.getX() - 1, this.getY())
-						.getPermeability() == Permeability.PENETRABLE;
+				return this.getMap().getOnTheMapXY(this.getX() - 1, this.getY()).getPermeability() == Permeability.PENETRABLE;
 			case NOP:
 			default:
 				return true;
 			}
 		
 		
-			protected Boolean pawnsAllowMovementTo(final UserOrder direction) {
-				Point desiredPosition = this.getPositionFromUserOrder(direction);
-				for (IMobile pawn : this.getMap().getPawns()) {
-					if (pawn.getPosition().equals(desiredPosition)) {
-						if (pawn.getPermeability() != Permeability.PENETRABLE) {
+			protected Boolean elementAllowsMovementTo(final UserOrder direction) {
+				Point choicePosition = this.getPositionFromUserOrder(direction);
+				for (IMobile mobEntity : this.getMap().getmobEntity()) {
+					if (mobEntity.getPosition().equals(choicePosition)) {
+						if (mobEntity.getPermeability() != Permeability.PENETRABLE) {
 							return false;
 						} else {
 							return true;

@@ -66,7 +66,7 @@ import java.io.IOException;
 	        this.setHasMoved();
 	}
 	    
-		public void DoNothing() {
+		public void doNothing() {
 			this.setHasMoved();
 		}
 

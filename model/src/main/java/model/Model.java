@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Observable;
 
 import contract.IModel;
+import entity.Door;
 import entity.HelloWorld;
 
 /**
@@ -15,7 +16,9 @@ public final class Model extends Observable implements IModel {
 
 	/** The helloWorld. */
 	private HelloWorld helloWorld;
-
+	
+	//State of the door
+	private Door door;
 	/**
 	 * Instantiates a new model.
 	 */
@@ -69,6 +72,12 @@ public final class Model extends Observable implements IModel {
 		}
 	}
 
+	//Verify if the character can go in the next level
+	public void nextLevel() {
+		if(door.state()==true && character.position==door.position) {
+			//The player is allowed to continue
+		}		
+	}
 	/**
      * Gets the observable.
      *

@@ -1,6 +1,6 @@
 package contract;
 
-public interface IMobile {
+public interface IMobile extends IEntity, IPawn{
 	
 	//Move up
 	void moveUp();

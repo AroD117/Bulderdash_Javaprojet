@@ -11,7 +11,7 @@ public class Wall extends MotionLess{
 	
 	//Default constructor
 	public Wall() {
-		super(sprite/*n°map*/, Permability.BLOCKING);
+		super(sprite+num, Permability.BLOCKING);
 	}
 
 }

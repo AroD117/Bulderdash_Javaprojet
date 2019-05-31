@@ -1,6 +1,6 @@
 package entity;
 
-public abstract class MotionLessFactory {
+public abstract class EntityFactory {
 	
 	//The wall
 	private static final Wall wall = new Wall();
@@ -13,6 +13,7 @@ public abstract class MotionLessFactory {
 	
 	//The door
 	private static final Door door = new Door();
+	
 	//An array of all different MotionLess used for get from char symbol.
 	private static Entity[] entity = {
 			wall,

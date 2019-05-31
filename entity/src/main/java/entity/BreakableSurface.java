@@ -11,7 +11,7 @@ public class BreakableSurface extends MotionLess{
 	
 	//Default constructor
 	public BreakableSurface() {
-		super(sprite/*n°map*/, Permability.MINEABLE);
+		super(sprite+num, Permability.MINEABLE);
 	}
 
 }

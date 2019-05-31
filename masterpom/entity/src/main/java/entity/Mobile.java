@@ -1,12 +1,14 @@
 package entity;
 
 import java.awt.Point;
+import java.io.IOException;
 
 
 	public abstract class Mobile extends Entity implements IMobile{
 	    private Point position;
 	    private Boolean alive = true;
 	    private IMap map;
+	    private Boolean fall = false;
 	    
 	public Mobile(final Sprite sprite, final IMap map, final Permeability permeability) {
 			super(sprite, permeability);
@@ -101,7 +103,7 @@ import java.awt.Point;
 		public boolean isCrashed() {
 			for (IMobile mobEntity: this.getMap().getmobEntity()) {
 				if (mobEntity.getSprite().getCharImage() == 'O' || mobEntity.getSprite().getCharImage() == 'V') {
-					if (mobEntity.getPosition().x == this.getPosition().x	&& mobEntity.getPosition().y == this.getPosition().y - 1 && mEntity.isFalling()) {
+					if (mobEntity.getPosition().x == this.getPosition().x	&& mobEntity.getPosition().y == this.getPosition().y - 1 && mobEntity.isFalling()) {
 						return true;
 					}
 				}
@@ -111,15 +113,15 @@ import java.awt.Point;
 		
 		public void remove()  {
 			this.setPosition(new Point(-1, 1));
-			this.getMap().getmEntity().remove(this);
+			this.getMap().getmobEntity().remove(this);
 			}
 		
-		public boolean canMove(ControllerOrder choice) {
-			return this.mapAllowsMvt(choice)&&this.entityAllowsmvt(choice);
+		public boolean canMove(UserOrder choice) {
+			return this.mapAllowsMovementTo(choice)&&this.entityAllowsmovementTo(choice);
 		
 		
-		protected boolean mapAllowsMovementTo(final UserOrder direction) {
-			switch (direction) {
+		protected boolean mapAllowsMovementTo(final UserOrder choice) {
+			switch (choice) {
 			case UP:
 				return this.getMap().getOnTheMapXY(this.getX(), this.getY() - 1).getPermeability() == Permeability.PENETRABLE;
 			case DOWN:
@@ -134,8 +136,8 @@ import java.awt.Point;
 			}
 		
 		
-			protected Boolean elementAllowsMovementTo(final UserOrder direction) {
-				Point choicePosition = this.getPositionFromUserOrder(direction);
+			protected Boolean entityAllowsMovementTo(final UserOrder choice) {
+				Point choicePosition = this.getPositionFromUserOrder(choice);
 				for (IMobile mobEntity : this.getMap().getmobEntity()) {
 					if (mobEntity.getPosition().equals(choicePosition)) {
 						if (mobEntity.getPermeability() != Permeability.PENETRABLE) {
@@ -150,30 +152,42 @@ import java.awt.Point;
 			}
 			
 			protected Point getPositionFromUserOrder(final UserOrder direction){
-				Point desiredPosition = null;
-				switch (direction) {
+				Point choicePosition = null;
+				switch (choice) {
 				case UP:
-					desiredPosition = new Point(this.getX(), this.getY() - 1);
+					choicePosition = new Point(this.getX(), this.getY() - 1);
 					break;
 				case DOWN:
-					desiredPosition = new Point(this.getX(), this.getY() + 1);
+					choicePosition = new Point(this.getX(), this.getY() + 1);
 					break;
 				case RIGHT:
-					desiredPosition = new Point(this.getX() + 1, this.getY());
+					choicePosition = new Point(this.getX() + 1, this.getY());
 					break;
 				case LEFT:
-					desiredPosition = new Point(this.getX() - 1, this.getY());
+					choicePosition = new Point(this.getX() - 1, this.getY());
 					break;
 				case NOP:
 				default:
-					desiredPosition = new Point(this.getX(), this.getY());
+					choicePosition = new Point(this.getX(), this.getY());
 					break;
 				}
 				
-				return desiredPosition;
+				return choicePosition;
 			}
 			
+			public void digg() {
+				this.getMap().setOnTheMapXY(EntityFactory.createDugWall(), this.getX(), this.getY());
+				try {
+					this.getMap().getOnTheMapXY(getX(), getY()).getSprite().loadImage();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 			
+		public boolean isFalling() {
+			return fall;
+		}
 	}
 
 

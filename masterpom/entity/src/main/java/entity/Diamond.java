@@ -1,10 +1,11 @@
 package entity;
+import java.awt.Rectangle;
 
 public class Diamond extends Mobile{
 
 	/* The Sprite corresponding */
 	
-	private static final Sprite sprite = new Sprite('D', Sprite.mapTileSet, new Rectangle(64, 0, 16, 16));
+	private static final Sprite sprite = new Sprite('D', Sprite.mapTileSet, new Rectangle(0, 0, 16, 16));
 
 	/*private static final IStrategy strategy = new DiamondStrategy();*/
 	
@@ -46,10 +47,11 @@ public class Diamond extends Mobile{
 			super.doNothing();
 		}
 		
-	  
-		/*@Override
-		public void followMyStrategy() {
-			Diamond.strategy.followStrategy(this, this.getMap());
-		}*/
+		@Override
+		public void remove() {
+			// TODO Auto-generated method stub
+			
+		}
+		
 		
 }

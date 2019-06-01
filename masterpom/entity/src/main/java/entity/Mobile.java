@@ -3,7 +3,6 @@ package entity;
 import java.awt.Point;
 import java.io.IOException;
 
-
 	public abstract class Mobile extends Entity implements IMobile{
 	    private Point position;
 	    private Boolean alive = true;

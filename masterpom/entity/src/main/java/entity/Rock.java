@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.IOException;
 
+
 public class Rock extends Mobile {
 
 	public Rock(final int x, final int y, final IMap map) throws IOException {

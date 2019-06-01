@@ -12,7 +12,7 @@ import entity.HelloWorld;
  *
  * @author Jean-Aymeric Diet
  */
-class DAOHelloWorld extends DAOEntity<HelloWorld> {
+class DAOMap extends DAOEntity<HelloWorld> {
 
 	/**
 	 * Instantiates a new DAO hello world.

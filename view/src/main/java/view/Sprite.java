@@ -127,7 +127,7 @@ public class Sprite extends JFrame{
 		  spritesDoorc.add(ss.grabSprite(96, 48, 16, 16));
 		  
 		  doorc = new Animator(spritesDoorc);
-		  doorc.setSpeed(180);
+		  doorc.setSpeed(100);
 		  doorc.play();
 	  }
 	  
@@ -151,7 +151,7 @@ public class Sprite extends JFrame{
 		  spritesDooro.add(ss.grabSprite(112, 48, 16, 16));
 		  
 		  dooro = new Animator(spritesDooro);
-		  dooro.setSpeed(180);
+		  dooro.setSpeed(100);
 		  dooro.play();
 	  }
 	  

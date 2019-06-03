@@ -3,8 +3,9 @@ package view;
 import java.awt.Graphics;
 import java.util.Observable;
 import java.util.Observer;
+
 import javax.swing.JPanel;
-//salut
+
 /**
  * The Class ViewPanel.
  *
@@ -64,6 +65,6 @@ class ViewPanel extends JPanel implements Observer {
 	@Override
 	protected void paintComponent(final Graphics graphics) {
 		graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
-		graphics.drawString(this.getViewFrame().getModel().getHelloWorld().getMessage(), 10, 20);
+		
 	}
 }

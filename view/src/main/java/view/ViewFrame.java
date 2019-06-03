@@ -8,8 +8,11 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import contract.IController;
+
 import contract.IModel;
+import view.IUserOrder;
+import entity.Map;
+import view.View;
 
 /**
  * The Class ViewFrame.
@@ -22,10 +25,11 @@ class ViewFrame extends JFrame implements KeyListener {
 	private IModel						model;
 
 	/** The controller. */
-	private IController				controller;
+	private IUserOrder			userOrder;
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -697358409737458175L;
 
+	public static Map map;
 	/**
 	 * Instantiates a new view frame.
 	 *
@@ -86,8 +90,8 @@ class ViewFrame extends JFrame implements KeyListener {
 	 *
 	 * @return the controller
 	 */
-	private IController getController() {
-		return this.controller;
+	private IUserOrder getUserOrder() {
+		return this.userOrder;
 	}
 
 	/**
@@ -96,8 +100,8 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * @param controller
 	 *          the new controller
 	 */
-	protected void setController(final IController controller) {
-		this.controller = controller;
+	protected void setUserOrder(final IUserOrder userOrder) {
+		this.userOrder = userOrder;
 	}
 
 	/**
@@ -131,7 +135,7 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setResizable(false);
 		this.addKeyListener(this);
 		this.setContentPane(new ViewPanel(this));
-		this.setSize(400 + this.getInsets().left + this.getInsets().right, 60 + this.getInsets().top + this.getInsets().bottom);
+		this.setSize(map.getWidth(), map.getHeight());
 		this.setLocationRelativeTo(null);
 	}
 
@@ -160,7 +164,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
 	 */
 	public void keyPressed(final KeyEvent e) {
-		this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
+		this.getUserOrder().orderPerform(View.keyCodeToUserOrder(e.getKeyCode()));
 	}
 
 	/*

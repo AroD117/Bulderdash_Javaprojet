@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import entity.Entity;
+import entity.Map;
 
 /**
  * The Class DAOEntity.
@@ -73,6 +74,6 @@ abstract class DAOEntity<E extends Entity> {
 	 *          the id
 	 * @return the e
 	 */
-	public abstract E find(int id);
+	public abstract Map find(int id);
 
 }

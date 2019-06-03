@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -31,24 +32,32 @@ class DAOMap extends DAOEntity {
      *
      * @see model.DAOEntity#find(int)
      */
-   public int map_number = 1;
+   
+    final ResultSet resultSet;
+    public int map_number = 1;
     public Map find(final int id) {
-        Map map = new Map(id, null, null);
+       
 
         try {
             final String sql = "SELECT map FROM map WHERE id ="+ map_number ;
             final CallableStatement call = this.getConnection().prepareCall(sql);
             call.execute();
-            final ResultSet resultSet = call.getResultSet();
             if (resultSet.next()) {
-                System.out.println(resultSet.getString("map"));
+                try {
+					this.resultSet;
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
-            return map;
         } catch (final SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
+    
+
+    
 	@Override
 	public boolean create(Entity entity) {
 		// TODO Auto-generated method stub

@@ -4,17 +4,15 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.IOException;
 
-
 public class Rock extends Mobile {
 
 public Rock(final int x, final int y, final IMap map) throws IOException {
- super(x, y, sprite, map, PERMEABILITY.BLOCKING);
+ super(x, y, sprite, map, Permeability.BLOCKING);
  sprite.loadImage();
  // TODO Auto-generated constructor stub
 }
 
-private static  final Sprite sprite = new Sprite('C',  Sprite,new Rectangle (48, 0, 16, 16));
-
+private static  final Sprite sprite = new Sprite('C', );
 
 
 @Override

@@ -1,17 +1,31 @@
 package entity;
 
+import java.awt.Image;
+
 public class Wall extends MotionLess{
 	
 	//Sprite for wall for each map
-	//private static final Sprite sprite1 = new Sprite('a', imageName)
-	//private static final Sprite sprite2 = new Sprite('g', imageName)
-	//private static final Sprite sprite3 = new Sprite('k', imageName)
-	//private static final Sprite sprite4 = new Sprite('g', imageName)
-	//private static final Sprite sprite5 = new Sprite('t', imageName)
+	private static final Sprite sprite = new Sprite('a', );
+	
 	
 	//Default constructor
 	public Wall() {
 		super(sprite, Permeability.BLOCKING);
+	}
+	@Override
+	public Permeability getPermeability() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Image getImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public Permeability getPermeability1() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -1,8 +1,8 @@
 package model;
 
 import java.util.Observable;
-
 import contract.IModel;
+import entity.IMobile;
 import entity.Map;
 
 /*
@@ -37,19 +37,6 @@ public final class Model extends Observable implements IModel {
 		return this.map;
 	}
 
-	/*
-     * Sets the hello world.
-     *
-     * @param helloWorld
-     *            the new hello world
-     */
-	private void setHelloWorld(final Map helloWorld) {
-		this.map = helloWorld;
-		this.setChanged();
-		this.notifyObservers();
-	}
-
-
 	/**
      * Gets the observable.
      *
@@ -64,9 +51,11 @@ public final class Model extends Observable implements IModel {
 		return this;
 	}
 
+
 	@Override
-	public void loadHelloWorld(String code) {
+	public IMobile getMyCharacter() {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
+
 }

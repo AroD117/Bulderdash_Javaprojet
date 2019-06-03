@@ -11,6 +11,7 @@ public abstract class Mobile extends Entity implements IMobile{
     private Boolean alive = true;
     private IMap map;
     private Boolean fall = false;
+    private Controlleur choice;
     
 public Mobile(final Sprite sprite, final IMap map, final Permeability permeability) {
   super(sprite, permeability);
@@ -159,7 +160,7 @@ public void moveUp() {
   
   public Point getPositionFromUserOrder(final UserOrder direction){
    Point choicePosition = null;
-   switch (choice) {
+   switch (Controller.choice) {
    case UP:
     choicePosition = new Point(this.getX(), this.getY() - 1);
     break;

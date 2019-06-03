@@ -3,9 +3,7 @@ package entity;
 
 import java.awt.Point;
 import java.io.IOException;
-import contract.IEntity;
-
-
+import entity.UserOrder
 
 public interface IMobile extends IEntity, IPawn {
  public int getX();

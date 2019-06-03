@@ -2,10 +2,8 @@ package entity;
 
 import java.util.ArrayList;
 import java.util.Observable;
-
 import entity.IMobile;
 import entity.Permeability;
-
 
 
 /**

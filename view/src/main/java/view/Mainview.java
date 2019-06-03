@@ -10,9 +10,11 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import contract.IController;
-import view.BoardFrame;
-import entity.*;
+import entity.Entity;
+import entity.Map;
+import entity.Mobile;
+import entity.UserOrder;
+import entity.IUserOrder;
 
 
 public class Mainview implements Runnable, KeyListener {
@@ -27,12 +29,14 @@ public class Mainview implements Runnable, KeyListener {
 	private Rectangle      closeView;
 
 	/** The Map. */
-	private Map            Map;
+	private Map    Map;
 
 	/** Les Mobiles. */
 	private Mobile    TheCharacter;
 	
 	private ArrayList<Mobile> mEntity;
+	
+	public static Map m;
 
 	public ArrayList<Mobile> getEntity() {
 		return mEntity;
@@ -47,7 +51,7 @@ public class Mainview implements Runnable, KeyListener {
 	private int            view;
 
 
-	private IController  orderPerformer;
+	private IUserOrder  orderPerformer;
 	private  BoardFrame boardFrame;
 
 
@@ -56,7 +60,7 @@ public class Mainview implements Runnable, KeyListener {
 		this.setMap(Map);
 		this.setTheCharacter(TheCharacter);
 		this.getTheCharacter().getSprite().loadImage();
-		this.setCloseView(new Rectangle(0, this.getTheCharacter().getY(), entity.Map.getWidth(), Map.getHeight()));
+		this.setCloseView(new Rectangle(0, this.getTheCharacter().getY(), m.getWidth(), m.getHeight()));
 		SwingUtilities.invokeLater(this);
 	}
 
@@ -74,21 +78,20 @@ public class Mainview implements Runnable, KeyListener {
 	@Override
 	public final void run() {
 		boardFrame = new BoardFrame("Close view");
-		boardFrame.setDimension(new Dimension(entity.Map.getWidth(), entity.Map.getHeight()));
+		boardFrame.setDimension(new Dimension(m.getWidth(), m.getHeight()));
 		boardFrame.setDisplayFrame(this.closeView);
 		boardFrame.setSize(this.closeView.width * squareSize, this.closeView.height * squareSize);
 		boardFrame.setHeightLooped(true);
 		boardFrame.addKeyListener(this);
 		boardFrame.setFocusable(true);
 		boardFrame.setFocusTraversalKeysEnabled(false);
-
 		this.getMap();
-		for (int x = 0; x < entity.Map.getWidth(); x++) {
-			for (int y = 0; y < entity.Map.getHeight(); y++) {
-				boardFrame.addSquare(this.Map.getOnMapXY(x, y), x, y);
+		for (int x = 0; x < m.getWidth(); x++) {
+			for (int y = 0; y < m.getHeight(); y++) {
+				boardFrame.addSquare(this.Map.getOnTheMapXY(x, y), x, y);
 			}
 		}
-		
+
 		boardFrame.addPawn(this.getTheCharacter());
 		for(Mobile Entities: mEntity) {
 			boardFrame.addPawn(Entities);
@@ -108,18 +111,18 @@ public class Mainview implements Runnable, KeyListener {
 	 */
 	public final void show(final int yStart) {
 		this.getMap();
-		int y = yStart % entity.Map.getHeight();
+		int y = yStart % m.getHeight();
 		for (int view = 0; view < this.getView(); view++) {
 			this.getMap();
-			for (int x = 0; x < entity.Map.getWidth(); x++) {
+			for (int x = 0; x < m.getWidth(); x++) {
 				if ((x == this.getTheCharacter().getX()) && (y == yStart)) {
-					System.out.print(this.getTheCharacter().getSprite().getCharImage());
+					System.out.print(this.getTheCharacter().getSprite().getConsoleImage());
 				} else {
-					System.out.print(this.getMap().getOnMapXY(x, y).getSprite().getCharImage());
+					System.out.print(this.getMap().getOnTheMapXY(x, y).getSprite().getConsoleImage());
 				}
 			}
 			this.getMap();
-			y = (y + 1) % entity.Map.getHeight();
+			y = (y + 1) % m.getHeight();
 			System.out.print("\n");
 		}
 	}
@@ -149,29 +152,29 @@ public class Mainview implements Runnable, KeyListener {
 	 */
 	@Override
 	public final void keyPressed(final KeyEvent keyEvent) {
-		this.getOrderPerformer().orderPerform(keyCodeToControllerOrder(keyEvent.getKeyCode()));
+		this.getOrderPerformer().orderPerform(keyCodeToUserOrder(keyEvent.getKeyCode()));
 	}
 
-	private ControllerOrder keyCodeToControllerOrder(int keyCode) {
-		ControllerOrder ControllerOrder;
+	private UserOrder keyCodeToUserOrder(int keyCode) {
+		UserOrder userOrder;
 		switch (keyCode) {
 		case KeyEvent.VK_RIGHT:
-			ControllerOrder = entity.ControllerOrder.RIGHT;
+			userOrder = UserOrder.RIGHT;
 			break;
 		case KeyEvent.VK_LEFT:
-			ControllerOrder = entity.ControllerOrder.LEFT;
+			userOrder = UserOrder.LEFT;
 			break;
 		case KeyEvent.VK_DOWN:
-			ControllerOrder = entity.ControllerOrder.DOWN;
+			userOrder = UserOrder.DOWN;
 			break;
 		case KeyEvent.VK_UP:
-			ControllerOrder = entity.ControllerOrder.UP;
+			userOrder = UserOrder.UP;
 			break;
 		default:
-			ControllerOrder = entity.ControllerOrder.NONE;
+			userOrder = UserOrder.NOP;
 			break;
 		}
-		return ControllerOrder;
+		return userOrder;
 	}
 	
 	public void removeFromBoard(Entity en) {
@@ -230,7 +233,7 @@ public class Mainview implements Runnable, KeyListener {
 	 * @param view
 	 *            the new view
 	 */
-	private void setView(final int view) {
+	private void setView (final int view) {
 		this.view = view;
 	}
 
@@ -250,7 +253,7 @@ public class Mainview implements Runnable, KeyListener {
 	 *
 	 * @return the order performer
 	 */
-	private IController getOrderPerformer() {
+	private IUserOrder getOrderPerformer() {
 		return this.orderPerformer;
 	}
 
@@ -258,36 +261,19 @@ public class Mainview implements Runnable, KeyListener {
 
 	/**
 	 * Sets the order performer.
+	 * @param orderPerformer 
 	 *
 	 * @param orderPerformer
 	 *            the new order performer
 	 */
-	public final void setOrderPerformer(final IController orderPerformer) {
+	public final void setOrderPerformer(final IUserOrder orderPerformer) {
 		this.orderPerformer = orderPerformer;
 	}
-	private static ControllerOrder keyCodeToUserOrder(final int keyCode) {
-        ControllerOrder userOrder;
-        switch (keyCode) {
-            case KeyEvent.VK_RIGHT:
-                userOrder = ControllerOrder.RIGHT;
-                break;
-            case KeyEvent.VK_LEFT:
-                userOrder = ControllerOrder.LEFT;
-                break;
-            case KeyEvent.VK_UP:
-            	userOrder = ControllerOrder.UP;
-            case KeyEvent.VK_DOWN:
-            	userOrder=ControllerOrder.DOWN;
-            default:
-                userOrder = ControllerOrder.NONE;
-                break;
-        }
-        return userOrder;
-    }
+
 	public void updateBoard() {
 		for(int x=0;x<Map.getWidth();x++) {
 			for(int y=0;y<Map.getHeight();y++) {
-				boardFrame.addSquare(this.Map.getOnMapXY(x, y),x,y);
+				boardFrame.addSquare(this.Map.getOnTheMapXY(x, y),x,y);
 			}
 		}
 	}

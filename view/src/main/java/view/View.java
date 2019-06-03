@@ -6,8 +6,9 @@ import javax.swing.SwingUtilities;
 
 import contract.IModel;
 import contract.IView;
-import view.UserOrder;
-import view.IUserOrder;
+import entity.IUserOrder;
+import entity.UserOrder;
+
 
 /**
  * The Class View.

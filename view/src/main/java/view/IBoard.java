@@ -4,8 +4,8 @@ import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.util.Observer;
 
-import contract.IPawn;
-import contract.ISquare;
+import entity.IPawn;
+import entity.ISquare;
 
 /**
  * <h1>The Interface IBoard.</h1>
@@ -26,14 +26,14 @@ public interface IBoard {
      * @param x the x
      * @param y the y
      */
-    void addSquare(ISquare square, int x, int y);
+    void addSquare(entity.ISquare square, int x, int y);
 
     /**
      * Adds the pawn.
      *
      * @param pawn the pawn
      */
-    void addPawn(IPawn pawn);
+    void addPawn(entity.IPawn pawn);
 
     /**
      * Gets the observer.
@@ -62,4 +62,5 @@ public interface IBoard {
      * @param displayFrame the new display frame
      */
     void setDisplayFrame(final Rectangle displayFrame);
+
 }

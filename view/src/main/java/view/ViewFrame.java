@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 
 import contract.IModel;
-import view.IUserOrder;
+import entity.IUserOrder;
 import entity.Map;
 import view.View;
 

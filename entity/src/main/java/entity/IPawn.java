@@ -1,6 +1,4 @@
-package contract;
-
-
+package entity;
 
 import java.awt.Point;
 

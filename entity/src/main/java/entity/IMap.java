@@ -1,4 +1,4 @@
-package contract;
+package entity;
 
 import java.util.ArrayList;
 import java.util.Observable;

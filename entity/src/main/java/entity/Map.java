@@ -4,9 +4,6 @@ import java.awt.Point;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
-import contract.IEntity;
-import contract.IMap;
-import contract.IEntity;
 
 /**
  * <h1>The Class Map provides a facade of the Model component.</h1>

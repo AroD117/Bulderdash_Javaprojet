@@ -6,9 +6,9 @@ import java.util.Observer;
 
 import javax.swing.JFrame;
 
-import contract.IPawn;
-import contract.ISquare;
-
+import contract.IEntity;
+import entity.ISquare;
+import entity.IPawn;
 /**
  * <h1>The Class BoardFrame.</h1>
  * <p>
@@ -91,16 +91,16 @@ public class BoardFrame extends JFrame implements IBoard {
      * (non-Javadoc)
      * @see fr.exia.showboard.IBoard#addSquare(fr.exia.showboard.ISquare, int, int)
      */
-    @Override
-    public final void addSquare(final ISquare square, final int x, final int y) {
-        this.getBoardPanel().addSquare(square, x, y);
+   
+    public final void addSquare(final IEntity iEntity, final int x, final int y) {
+        this.getBoardPanel().addSquare(iEntity, x, y);
     }
 
     /*
      * (non-Javadoc)
      * @see fr.exia.showboard.IBoard#addPawn(fr.exia.showboard.IPawn)
      */
-    @Override
+    
     public final void addPawn(final IPawn pawn) {
         this.getBoardPanel().addPawn(pawn);
     }
@@ -196,5 +196,14 @@ public class BoardFrame extends JFrame implements IBoard {
     public final void setHeightLooped(final Boolean heightLooped) {
         this.getBoardPanel().setHeightLooped(heightLooped);
     }
+
+	
+
+	
+	
+
+	
+		
+	
 }
 

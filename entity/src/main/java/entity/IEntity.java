@@ -1,10 +1,10 @@
-package contract;
+package entity;
 
 import java.awt.Image;
 import entity.Permeability;
 import entity.Sprite; 
 
-public interface IEntity {
+public interface IEntity extends ISquare{
 
 	//Gets the sprite
 		Sprite getSprite();

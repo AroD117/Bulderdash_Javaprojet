@@ -33,6 +33,7 @@ public void SetX(int x) {
  this.getPosition().x = x;
         if (this.isCrashed()) {
             this.die();
+        }
 }
 
 public int GetY() {
@@ -43,6 +44,7 @@ public void SetY(int y) {
  this.getPosition().y = y;
     if (this.isCrashed()) {
     this.die();
+    }
 }
      
 public void moveUp() {
@@ -118,11 +120,12 @@ public void moveUp() {
   this.getMap().getmobEntity().remove(this);
   }
  
- public Boolean canMove(UserOrder choice) {
+ public boolean canMove(UserOrder choice) {
   return this.mapAllowsMovementTo(choice)&&this.entityAllowsmovementTo(choice);
+ }
  
  
- protected Boolean mapAllowsMovementTo(final UserOrder choice) {
+ protected boolean mapAllowsMovementTo(final UserOrder choice) {
   switch (choice) {
   case UP:
    return this.getMap().getOnTheMapXY(this.getX(), this.getY() - 1).getPermeability() == Permeability.PENETRABLE;
@@ -132,10 +135,11 @@ public void moveUp() {
    return this.getMap().getOnTheMapXY(this.getX() + 1, this.getY()).getPermeability() == Permeability.PENETRABLE;
   case LEFT:
    return this.getMap().getOnTheMapXY(this.getX() - 1, this.getY()).getPermeability() == Permeability.PENETRABLE;
-  case NO:
+  case NOP:
   default:
    return true;
   }
+ }
  
  
   protected Boolean entityAllowsMovementTo(final UserOrder choice) {
@@ -153,7 +157,7 @@ public void moveUp() {
    return true;
   }
   
-  protected Point getPositionFromUserOrder(final UserOrder direction){
+  public Point getPositionFromUserOrder(final UserOrder direction){
    Point choicePosition = null;
    switch (choice) {
    case UP:
@@ -168,7 +172,7 @@ public void moveUp() {
    case LEFT:
     choicePosition = new Point(this.getX() - 1, this.getY());
     break;
-   case NO:
+   case NOP:
    default:
     choicePosition = new Point(this.getX(), this.getY());
     break;
@@ -178,7 +182,7 @@ public void moveUp() {
   }
   
   public void digg() {
-   this.getMap().setOnTheMapXY(EntityFactory.createDugWall(), this.getX(), this.getY());
+   this.getMap().setOnTheMapXY(this.getX(), this.getY(),EntityFactory.createBrokenSurface());
    try {
     this.getMap().getOnTheMapXY(getX(), getY()).getSprite().loadImage();
    } catch (IOException e) {
@@ -187,7 +191,7 @@ public void moveUp() {
    }
   }
   
- public Boolean isFalling() {
+ public boolean isFalling() {
   return fall;
  }
 }

@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 import entity.Entity;
 import entity.Map;
-import model.DBConnection;
 
 
 /* The Class DAOMap.
@@ -24,7 +23,7 @@ class DAOMap extends DAOEntity {
      * @throws SQLException
      *           the SQL exception
      */
-    public DAOMap(final Connection connection) throws SQLException {
+    public DAOMap(Connection connection) throws SQLException {
         super(connection);
     }
     
@@ -44,7 +43,7 @@ class DAOMap extends DAOEntity {
             call.execute();
             if (resultSet.next()) {
                 try {
-					this.resultSet;
+					this.Switch(resultSet);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -56,6 +55,21 @@ class DAOMap extends DAOEntity {
         return null;
     }
     
+    public void Switch(ResultSet rs) throws SQLException, IOException 
+	{	 
+	  System.out.println("testrzpg,");
+	 
+	  for (char c : rs.getString("map").toCharArray())
+	  {
+		  System.out.println(c);
+		  if (c == 'g') 
+		  {
+
+
+		  }
+		  
+	  }
+	}
 
     
 	@Override

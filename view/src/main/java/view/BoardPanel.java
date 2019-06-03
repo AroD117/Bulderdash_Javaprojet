@@ -17,8 +17,9 @@ import java.util.Observer;
 
 import javax.swing.JPanel;
 
-import contract.IPawn;
-import contract.ISquare;
+import contract.IEntity;
+import entity.IPawn;
+import entity.ISquare;
 
 /**
  * <h1>The Class BoardPanel.</h1>
@@ -130,15 +131,15 @@ class BoardPanel extends JPanel implements Observer {
     /**
      * Adds the square.
      *
-     * @param square
+     * @param iEntity
      *            the square
      * @param x
      *            the x
      * @param y
      *            the y
      */
-    public final void addSquare(final ISquare square, final int x, final int y) {
-        this.squares[x][y] = square;
+    public final void addSquare(final IEntity iEntity, final int x, final int y) {
+        this.squares[x][y] = (ISquare) iEntity;
     }
 
     /**

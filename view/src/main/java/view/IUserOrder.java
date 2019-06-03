@@ -1,11 +1,12 @@
-package contract;
+    
+package view;
 
 /**
  * The Interface IController.
  *
  * @author Jean-Aymeric Diet
  */
-public interface IController {
+public interface IUserOrder{
 
 	/**
 	 * Control.
@@ -18,5 +19,5 @@ public interface IController {
 	 * @param controllerOrder
 	 *          the controller order
 	 */
-	public void orderPerform(ControllerOrder controllerOrder);
+	public void orderPerform(UserOrder userOrder);
 }

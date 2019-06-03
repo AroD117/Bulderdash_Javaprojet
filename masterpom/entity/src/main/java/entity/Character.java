@@ -122,7 +122,7 @@ public class Character extends Mobile{
 	}
 	
 	
-	public boolean mapAllowsMvt(final UserOrder choice) {
+	public boolean mapAllowsMovementTo(final UserOrder choice) {
 		switch (choice) {
 		case Up : 
 			return this.getMap().getOnTheMapXY(this.getX(), this.getY() - 1).getPermeability() != PERMEABILITY.BLOCKING;

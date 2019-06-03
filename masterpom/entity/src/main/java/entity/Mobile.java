@@ -3,6 +3,7 @@ package entity;
 import java.awt.Point;
 import java.io.IOException;
 
+
 	public abstract class Mobile extends Entity implements IMobile{
 	    private Point position;
 	    private Boolean alive = true;
@@ -115,11 +116,11 @@ import java.io.IOException;
 			this.getMap().getmobEntity().remove(this);
 			}
 		
-		public boolean canMove(UserOrder choice) {
+		public Boolean canMove(UserOrder choice) {
 			return this.mapAllowsMovementTo(choice)&&this.entityAllowsmovementTo(choice);
 		
 		
-		protected boolean mapAllowsMovementTo(final UserOrder choice) {
+		protected Boolean mapAllowsMovementTo(final UserOrder choice) {
 			switch (choice) {
 			case UP:
 				return this.getMap().getOnTheMapXY(this.getX(), this.getY() - 1).getPermeability() == Permeability.PENETRABLE;
@@ -129,7 +130,7 @@ import java.io.IOException;
 				return this.getMap().getOnTheMapXY(this.getX() + 1, this.getY()).getPermeability() == Permeability.PENETRABLE;
 			case LEFT:
 				return this.getMap().getOnTheMapXY(this.getX() - 1, this.getY()).getPermeability() == Permeability.PENETRABLE;
-			case NOP:
+			case NO:
 			default:
 				return true;
 			}
@@ -165,7 +166,7 @@ import java.io.IOException;
 				case LEFT:
 					choicePosition = new Point(this.getX() - 1, this.getY());
 					break;
-				case NOP:
+				case NO:
 				default:
 					choicePosition = new Point(this.getX(), this.getY());
 					break;
@@ -184,7 +185,7 @@ import java.io.IOException;
 				}
 			}
 			
-		public boolean isFalling() {
+		public Boolean isFalling() {
 			return fall;
 		}
 	}

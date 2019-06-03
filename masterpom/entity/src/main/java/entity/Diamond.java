@@ -1,7 +1,6 @@
 package entity;
 import java.awt.Rectangle;
 
-
 public class Diamond extends Mobile{
 
 	/* The Sprite corresponding */

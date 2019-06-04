@@ -32,7 +32,7 @@ class DAOMap extends DAOEntity {
      * @see model.DAOEntity#find(int)
      */
    
-    final ResultSet resultSet;
+    ResultSet resultSet;
     public int map_number = 1;
     public Map find(final int id) {
        

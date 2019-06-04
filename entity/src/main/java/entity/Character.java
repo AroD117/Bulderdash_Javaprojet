@@ -17,8 +17,10 @@ private static final Sprite spriteRight = new Sprite('C', Sprite.Character,new R
 private static final Sprite spriteDown = new Sprite('C', Sprite.Character, new Rectangle (0, 0, 16, 16));
 private static final Sprite spriteUp = new Sprite('C', Sprite.Character, new Rectangle (0, 0, 16, 16));
 private static final Sprite spriteDeath = new Sprite('C', Sprite.Character, new Rectangle (0, 0, 16, 16));
+
+
 public Character(int x, int y, IMap map) throws IOException {
- super(x, y, sprite, map, PERMEABILITY.BLOCKING);
+ super(x, y, sprite, map, Permeability.BLOCKING);
  spriteLeft.loadImage();
  spriteRight.loadImage();
  spriteDown.loadImage();
@@ -124,7 +126,7 @@ public boolean entityAllowsMovementTo(final UserOrder choice) {
 
 public boolean mapAllowsMovementTo(final UserOrder choice) {
  switch (choice) {
- case Up : 
+ case UP : 
   return this.getMap().getOnTheMapXY(this.getX(), this.getY() - 1).getPermeability() != PERMEABILITY.BLOCKING;
  case Down : 
   return this.getMap().getOnTheMapXY(this.getX(), this.getY() + 1).getPermeability() != PERMEABILITY.BLOCKING;

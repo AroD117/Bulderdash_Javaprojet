@@ -1,6 +1,8 @@
 package contract;
 
 import java.util.Observable;
+
+import entity.IMap;
 import entity.IMobile;
 
 /**

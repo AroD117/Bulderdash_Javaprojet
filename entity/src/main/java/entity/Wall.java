@@ -5,7 +5,7 @@ import java.awt.Image;
 public class Wall extends MotionLess{
 	
 	//Sprite for wall for each map
-	private static final Sprite sprite = new Sprite('a', );
+	private static final Sprite sprite = new Sprite('a', "Mur1");
 	
 	
 	//Default constructor

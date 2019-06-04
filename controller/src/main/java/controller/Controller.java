@@ -1,11 +1,10 @@
 package controller;
 import java.io.IOException;
 
-import contract.controller.IBoulderDashController;
-import contract.controller.IOrderPerformer;
-import contract.controller.UserOrder;
-import contract.model.IModel;
-import contract.view.IView;
+import contract.IModel;
+import contract.IView;
+import entity.UserOrder;
+
 
 /**
  * <h1>The Class ControllerFacade provides the code of the Controller
@@ -15,7 +14,7 @@ import contract.view.IView;
  * @author Tejesh Tailor
  * @version 1.0
  */
-public class ControllerFacade implements IOrderPerformer, IBoulderDashController {
+public class Controller implements IOrderPerformer, IBoulderDashController {
 
   /** The view. */
   private final IView view;
@@ -37,7 +36,7 @@ public class ControllerFacade implements IOrderPerformer, IBoulderDashController
    * @param model
    *          the model
    */
-  public ControllerFacade(final IView view, final IModel model) {
+  public Controller(final IView view, final IModel model) {
     super();
     this.view = view;
     this.model = model;
@@ -48,13 +47,12 @@ public class ControllerFacade implements IOrderPerformer, IBoulderDashController
    * 
    * @throws InterruptedException
    */
-  @Override
   public void start() throws InterruptedException {
     this.getModel().getMap().setMyCharacter(this.getModel().getMyCharacter());
     while (this.getModel().getMyCharacter().isAlive()) {
       Thread.sleep(speed);
       
-      if (this.getModel().getMyCharacter().canMoveTo(this.getStackOrder())) {
+      if (this.getModel().getMyCharacter().canMove(this.getStackOrder())) {
         switch (this.getStackOrder()) {
         case RIGHT:
           this.getModel().getMyCharacter().moveRight();
@@ -107,7 +105,6 @@ public class ControllerFacade implements IOrderPerformer, IBoulderDashController
     return this.model;
   }
 
-  @Override
   public IOrderPerformer getOrderPeformer() {
     return this;
   }
@@ -119,7 +116,6 @@ public class ControllerFacade implements IOrderPerformer, IBoulderDashController
  * 
  */
   
-  @Override
   public final void orderPerform(final UserOrder userOrder) throws IOException {
     this.setStackOrder(userOrder);
   }

@@ -3,7 +3,7 @@ package entity;
 
 import java.awt.Point;
 import java.io.IOException;
-import entity.UserOrder
+import entity.UserOrder;
 
 public interface IMobile extends IEntity, IPawn {
  public int getX();

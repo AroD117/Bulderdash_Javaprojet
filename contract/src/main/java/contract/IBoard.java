@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.util.Observer;
 
 import entity.IPawn;
+import entity.ISquare;
 
 /**
  * <h1>The Interface IBoard.</h1>

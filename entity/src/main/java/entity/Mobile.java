@@ -3,7 +3,7 @@ package entity;
 import java.awt.Point;
 import java.io.IOException;
 
-import contract.IMap;
+import entity.IMap;
 
 
 public abstract class Mobile extends Entity implements IMobile{
@@ -11,7 +11,6 @@ public abstract class Mobile extends Entity implements IMobile{
     private Boolean alive = true;
     private IMap map;
     private Boolean fall = false;
-    private Controlleur choice;
     
 public Mobile(final Sprite sprite, final IMap map, final Permeability permeability) {
   super(sprite, permeability);
@@ -107,13 +106,13 @@ public void moveUp() {
  
  public boolean isCrashed() {
   for (IMobile mobEntity: this.getMap().getmobEntity()) {
-   if (mobEntity.getSprite().getCharImage() == 'O' || mobEntity.getSprite().getCharImage() == 'V') {
+   if (mobEntity.getSprite().getConsoleImage() == 'O' || mobEntity.getSprite().getConsoleImage() == 'V') {
     if (mobEntity.getPosition().x == this.getPosition().x && mobEntity.getPosition().y == this.getPosition().y - 1 && mobEntity.isFalling()) {
      return true;
     }
    }
   }
-  return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == PERMEABILITY.BLOCKING;
+  return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.BLOCKING;
  }
  
  public void remove()  {
@@ -122,7 +121,7 @@ public void moveUp() {
   }
  
  public boolean canMove(UserOrder choice) {
-  return this.mapAllowsMovementTo(choice)&&this.entityAllowsmovementTo(choice);
+  return this.mapAllowsMovementTo(choice)&&this.entityAllowsMovementTo(choice);
  }
  
  
@@ -158,7 +157,7 @@ public void moveUp() {
    return true;
   }
   
-  public Point getPositionFromUserOrder(final UserOrder direction){
+  /*public Point getPositionFromUserOrder(final UserOrder direction){
    Point choicePosition = null;
    switch (Controller.choice) {
    case UP:
@@ -180,14 +179,13 @@ public void moveUp() {
    }
    
    return choicePosition;
-  }
+  }*/
   
   public void digg() {
    this.getMap().setOnTheMapXY(this.getX(), this.getY(),EntityFactory.createBrokenSurface());
    try {
     this.getMap().getOnTheMapXY(getX(), getY()).getSprite().loadImage();
    } catch (IOException e) {
-    // TODO Auto-generated catch block
     e.printStackTrace();
    }
   }

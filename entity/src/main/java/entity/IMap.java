@@ -1,5 +1,5 @@
 package entity;
-
+//salut
 import java.util.ArrayList;
 import java.util.Observable;
 import entity.IMobile;

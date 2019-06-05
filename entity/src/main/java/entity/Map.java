@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Observable;
-
+//salut
 /**
  * <h1>The Class Map provides a facade of the Model component.</h1>
  * @author Paul Combaldieu

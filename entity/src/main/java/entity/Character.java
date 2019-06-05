@@ -8,7 +8,7 @@ import entity.IMap;
 
 import entity.PERMEABILITY;
 import entity.Sprite;
-
+//salut
 
 public class Character extends Mobile{
 private static final Sprite sprite = new Sprite('C', Sprite.Character,new Rectangle (0, 0, 16, 16));

@@ -1,5 +1,5 @@
 package entity;
-
+//salut
 public class Door extends MotionLess{
 	
 	//Open door

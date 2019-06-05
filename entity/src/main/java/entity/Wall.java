@@ -1,5 +1,5 @@
 package entity;
-
+//salut
 import java.awt.Image;
 
 public class Wall extends MotionLess{

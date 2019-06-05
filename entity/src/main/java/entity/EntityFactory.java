@@ -1,5 +1,5 @@
 package entity;
-
+//salut
 public abstract class EntityFactory {
 	
 	//The wall

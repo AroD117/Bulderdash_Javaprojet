@@ -3,6 +3,7 @@ import java.awt.Rectangle;
 
 public class Diamond extends Mobile{
 
+	//salut
 /* The Sprite corresponding */
 
 private static final Sprite sprite = new Sprite('D', Sprite.mapTileSet, new Rectangle(0, 0, 16, 16));

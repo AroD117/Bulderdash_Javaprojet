@@ -1,5 +1,5 @@
 package entity;
-
+//salut
 public enum Permeability {
 
 	//It's mineable

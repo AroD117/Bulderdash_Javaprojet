@@ -1,5 +1,5 @@
 package model;
-
+//salut
 import java.util.Observable;
 import contract.IModel;
 import entity.IMobile;

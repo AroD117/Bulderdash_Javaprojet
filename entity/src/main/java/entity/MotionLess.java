@@ -1,6 +1,6 @@
     
 package entity;
-
+//salut
 public abstract class MotionLess extends Entity{
 	
 	//Number for the map

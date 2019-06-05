@@ -1,5 +1,5 @@
 package entity;
-
+// salut
 public class BreakableSurface extends MotionLess{
 	
 	//Sprite for breakable surface for each map

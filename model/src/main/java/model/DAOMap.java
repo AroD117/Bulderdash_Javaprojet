@@ -34,14 +34,16 @@ class DAOMap extends DAOEntity {
    
     ResultSet resultSet;
     public int map_number = 1;
-    public Map find(final int id) {
+    public Map find(final int id) 
+    {
        
 
         try {
             final String sql = "SELECT map FROM map WHERE id ="+ map_number ;
             final CallableStatement call = this.getConnection().prepareCall(sql);
             call.execute();
-            if (resultSet.next()) {
+            if (resultSet.next()) 
+            {
                 try {
 					this.Switch(resultSet);
 				} catch (IOException e) {
@@ -62,7 +64,7 @@ class DAOMap extends DAOEntity {
 	  for (char c : rs.getString("map").toCharArray())
 	  {
 		  System.out.println(c);
-		  if (c == 'g') 
+		  if (c == 'a') 
 		  {
 
 

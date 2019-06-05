@@ -6,7 +6,7 @@ import java.io.IOException;
 import UserOrder;
 import IEntity;
 
-public interface IMobile extends IEntity {
+public interface IMobile extends IEntity, IPawn {
 		public int getX();
 		public int getY();
 		public void setX(int x);

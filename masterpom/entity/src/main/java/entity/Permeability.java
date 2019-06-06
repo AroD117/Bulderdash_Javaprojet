@@ -1,13 +1,13 @@
 package entity;
-
+//salut
 public enum Permeability {
 
-	    /* The blocking */
-	    BLOCKING,
-	    
-	    /* The penetrable */
-	    PENETRABLE,
-	    
-	    /* The mineable */
-	    MINEABLE;
+	//It's mineable
+	MINEABLE,
+		
+	//It's penetrable
+	PENETRABLE,
+	
+	//It's blocking
+	BLOCKING;
 }

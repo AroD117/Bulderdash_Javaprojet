@@ -206,4 +206,3 @@ public class BoardFrame extends JFrame implements IBoard {
 		
 	
 }
-

@@ -1,120 +1,104 @@
 package entity;
 
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.io.IOException;
 
 import entity.IMap;
 
-import entity.PERMEABILITY;
+import entity.Permeability;
 import entity.Sprite;
+import entity.Map;
 //salut
 
 public class Character extends Mobile{
-private static final Sprite sprite = new Sprite('C', Sprite.Character,new Rectangle (0, 0, 16, 16));
-private static final Sprite spriteLeft = new Sprite('C', Sprite.Character, new Rectangle (0, 0, 16, 16));
-private static final Sprite spriteRight = new Sprite('C', Sprite.Character,new Rectangle (0, 0, 16, 16));
-private static final Sprite spriteDown = new Sprite('C', Sprite.Character, new Rectangle (0, 0, 16, 16));
-private static final Sprite spriteUp = new Sprite('C', Sprite.Character, new Rectangle (0, 0, 16, 16));
-private static final Sprite spriteDeath = new Sprite('C', Sprite.Character, new Rectangle (0, 0, 16, 16));
-
+private static final Sprite sprite = new Sprite('C', "character");
 
 public Character(int x, int y, IMap map) throws IOException {
  super(x, y, sprite, map, Permeability.BLOCKING);
- spriteLeft.loadImage();
- spriteRight.loadImage();
- spriteDown.loadImage();
- spriteUp.loadImage();
- spriteDeath.loadImage();
 }
+
 public void moveUp() {
  super.digg();
  super.moveUp();
- this.setSprite(spriteUp); 
 }
 public void moveDown() {
  super.digg();
  super.moveDown();
- this.setSprite(spriteDown);
 }
 public void moveRight() {
  super.digg();
  super.moveRight();
- this.setSprite(spriteRight);
 }
 
 public void moveLeft() {
  super.digg();
  super.moveLeft();
- this.setSprite(spriteLeft);
 }
 public void doNothing() {
  super.doNothing();
  this.setSprite(sprite);
 }
-public void die() {
- // TODO Auto-generated method stub
- super.die();
- this.setSprite(spriteDeath);
-}
+
 public boolean isCrashed() {
  // TODO Auto-generated method stub
  return super.isCrashed();
 }
 
-public boolean entityAllowsMovementTo(final UserOrder choice) {
+public Boolean entityAllowsMovementTo(final UserOrder choice) {
  Boolean push = false;
  switch (choice) {
- case Right:
-  push = this.getMap().getOnTheMapXY(getX() + 2, getY()).getPermeability() == PERMEABILITY.PENETRABLE;
+ case RIGHT:
+  push = this.getMap().getOnTheMapXY(getX() + 2, getY()).getPermeability() == Permeability.PENETRABLE;
   if (push) {
-   for (IMobile mobEntity : this.getMap().getmEntity()) {
-    if (mobEntity.getPosition().x == getX() + 2 && mobEntity.getPosition().y == getY()
-      && mobEntity.getPermeability() != PERMEABILITY.PENETRABLE) {
+   for (IMobile pawns : this.getMap().getPawns()) {
+    if (pawns.getPosition().x == getX() + 2 && pawns.getPosition().y == getY()
+      && pawns.getPermeability() != Permeability.PENETRABLE) {
      push = false;
      break;
     }
    }
   }
   break;
- case Left:
-  push = this.getMap().getOnTheMapXY(getX() - 2, getY()).getPermeability() == PERMEABILITY.PENETRABLE;
+ case LEFT:
+  push = this.getMap().getOnTheMapXY(getX() - 2, getY()).getPermeability() == Permeability.PENETRABLE;
   if (push) {
-   for (IMobile mEntity : this.getMap().getmobEntity()) {
-    if (mobEntity.getPosition().x == getX() - 2 && mobEntity.getPosition().y == getY()
-      && mobEntity.getPermeability() != PERMEABILITY.PENETRABLE) {
+   for (IMobile pawns : this.getMap().getPawns()) {
+    if (pawns.getPosition().x == getX() - 2 && pawns.getPosition().y == getY()
+      && pawns.getPermeability() != Permeability.PENETRABLE) {
      push = false;
      break;
     }
    }
   }
   break;
- case None:
+ case NOP:
  default:
   break;
  }
  
  
- final Point choicePosition = this.getPositionAfterOrder(choice);
- for (IMobile mobEntity : this.getMap().getmobEntity()) {
-  if (mobEntity.getPosition().equals(choicePosition)) {
-   if (mobEntity.getPermeability() == PERMEABILITY.BLOCKING) {
+ final Point choicePosition = this.getPositionFromUserOrder(choice);
+ for (IMobile pawns : this.getMap().getPawns()) {
+  if (pawns.getPosition().equals(choicePosition)) {
+   if (pawns.getPermeability() == Permeability.BLOCKING) {
     if (push) {
-     if (choice == UserOrder.Right)
-      mobEntity.moveRight();
+     if (choice == UserOrder.RIGHT)
+      pawns.moveRight();
      else
-      mobEntity.moveLeft();
+      pawns.moveLeft();
      return true;
     } else {
 
      return false;
     }
 
-   } else if (mobEntity.getPermeability() == PERMEABILITY.MINEABLE) {
+   } else if (pawns.getPermeability() == Permeability.MINEABLE) {
     // Player stepped on a diamond
 
-    mobEntity.remove();
-    this.getMap().decreaseDiamond();
+    pawns.remove();
+    this.getMap().decreaseDiamondCount();
 
     return true;
    }
@@ -127,14 +111,14 @@ public boolean entityAllowsMovementTo(final UserOrder choice) {
 public boolean mapAllowsMovementTo(final UserOrder choice) {
  switch (choice) {
  case UP : 
-  return this.getMap().getOnTheMapXY(this.getX(), this.getY() - 1).getPermeability() != PERMEABILITY.BLOCKING;
- case Down : 
-  return this.getMap().getOnTheMapXY(this.getX(), this.getY() + 1).getPermeability() != PERMEABILITY.BLOCKING;
- case Right : 
-  return this.getMap().getOnTheMapXY(this.getX()+1, this.getY()).getPermeability() != PERMEABILITY.BLOCKING;
- case Left : 
-  return this.getMap().getOnTheMapXY(this.getX()-1, this.getY()).getPermeability() != PERMEABILITY.BLOCKING;
- case None:
+  return this.getMap().getOnTheMapXY(this.getX(), this.getY() - 1).getPermeability() != Permeability.BLOCKING;
+ case DOWN : 
+  return this.getMap().getOnTheMapXY(this.getX(), this.getY() + 1).getPermeability() != Permeability.BLOCKING;
+ case RIGHT : 
+  return this.getMap().getOnTheMapXY(this.getX()+1, this.getY()).getPermeability() != Permeability.BLOCKING;
+ case LEFT : 
+  return this.getMap().getOnTheMapXY(this.getX()-1, this.getY()).getPermeability() != Permeability.BLOCKING;
+ case NOP:
   default:
    return true;
  }
@@ -151,6 +135,57 @@ public boolean canMove(final UserOrder choice) {
 public void remove() {
  // TODO Auto-generated method stub
  
+}
+@Override
+public int getX() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public int getY() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+@Override
+public void setX(int x) {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void setY(int y) {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public void setHasMoved() {
+	// TODO Auto-generated method stub
+	
+}
+@Override
+public Point getPositionFromUserOrder(UserOrder choice) {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public Permeability getPermeability() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public Image getImage() {
+	// TODO Auto-generated method stub
+	return null;
+}
+@Override
+public Permeability getPermeability1() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public void die() {
+	// TODO Auto-generated method stub
+	
 }
 
 

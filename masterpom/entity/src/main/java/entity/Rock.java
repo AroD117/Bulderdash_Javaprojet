@@ -1,4 +1,5 @@
 package entity;
+import java.awt.Image;
 //salut
 import java.awt.Point;
 import java.awt.Rectangle;
@@ -47,31 +48,31 @@ public void doNothing() {
 
 
 @Override
-public boolean entityAllowsmovementTo(UserOrder choice) {
+public Boolean entityAllowsMovementTo(UserOrder choice) {
  Point choicePosition = null;
  switch (choice) {
- case Up : 
+ case UP : 
   choicePosition = new Point(this.getX(), this.getY()-1);
   break;
- case Down : 
+ case DOWN : 
   choicePosition = new Point(this.getX(), this.getY()+1);
   break;
- case Right : 
+ case RIGHT : 
   choicePosition = new Point(this.getX()+1, this.getY());
   break;
- case Left : 
+ case LEFT : 
   choicePosition = new Point(this.getX()-1, this.getY());
   break;
- case None : 
+ case NOP : 
   default : 
    return true;
  
  }
- if (this.getMap().getCharacter().getPosition().equals(choicePosition)) {
+ if (this.getMap().getMyCharacter().getPosition().equals(choicePosition)) {
   return false;
  }
  else {
-  return super.entityAllowsmevementTo(choice);
+  return super.entityAllowsMovementTo(choice);
  }
 }
 
@@ -79,5 +80,85 @@ public boolean entityAllowsmovementTo(UserOrder choice) {
 public void remove() {
  // TODO Auto-generated method stub
  
+}
+
+
+
+@Override
+public int getX() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+
+
+@Override
+public int getY() {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+
+
+@Override
+public void setX(int x) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+
+@Override
+public void setY(int y) {
+	// TODO Auto-generated method stub
+	
+}
+
+
+
+@Override
+public void die() {
+	// TODO Auto-generated method stub
+	
+}
+
+
+
+@Override
+public void setHasMoved() {
+	// TODO Auto-generated method stub
+	
+}
+
+
+
+@Override
+public Point getPositionFromUserOrder(UserOrder choice) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
+@Override
+public Permeability getPermeability() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
+@Override
+public Image getImage() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+
+@Override
+public Permeability getPermeability1() {
+	// TODO Auto-generated method stub
+	return null;
 }
 }

@@ -88,15 +88,16 @@ public class EntityFactoryTest {
     assertEquals(EntityFactory.createWall().getSprite().getConsoleImage(), 'a');
 
   }
+}
   
   //This test verify that method testCreateDoor does not return a null result,
   //and verify that a piece has been properly initialized and are equals.
 
-  public void testCreateDoor() {
+  /*public void testCreateDoor() {
  
   assertNotNull (EntityFactory.createDoor());
   
   assertEquals(EntityFactory.createDoor().getSprite().getConsoleImage(), 'e');
   }
 
-}
+}*/

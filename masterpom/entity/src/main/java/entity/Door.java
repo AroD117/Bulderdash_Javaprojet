@@ -1,5 +1,11 @@
-package entity;
+/*package entity;
 //salut
+
+import java.awt.Image;
+
+private static final String imageName ="";
+private static final Sprite sprite1 = new Sprite('b', imageName);
+
 public class Door extends MotionLess{
 	
 	//Open door
@@ -9,10 +15,10 @@ public class Door extends MotionLess{
 	//private static final Sprite sprite = new Sprite('a def', imageName)
 	
 	//Number of diamounds
-	Diamond diamond;
+	public Diamond diamond
 	
 	//Change the 
-	if (diamond.getDiamoudsCount()==12) {
+	if (diamond.getDiamondCount()==12) {
 		//private static final Sprite sprite = new Sprite('a def', imageName)
 	} else {
 		//private static final Sprite sprite = new Sprite('a def', imageName)
@@ -24,12 +30,30 @@ public class Door extends MotionLess{
 	}
 	
 	//Verify if the door is open or close 
-	public boolean state() {
-		if(diamond.getDiamoudsCount()==12){
+	public Boolean state() {
+		if(diamond.getDiamondCount()==12){
 			return true;
 		}else {
 			return false;
 		}
 	}
 
-}
+	@Override
+	public Permeability getPermeability() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Image getImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Permeability getPermeability1() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}*/

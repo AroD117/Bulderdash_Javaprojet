@@ -11,15 +11,15 @@ public abstract class EntityFactory {
 	//The broken surface
 	private static final BrokenSurface brokenSurface = new BrokenSurface();
 	
-	//The door
-	private static final Door door = new Door();
+	/*//The door
+	private static final Door door = new Door();*/
 	
 	//An array of all different MotionLess used for get from char symbol.
 	private static Entity[] entity = {
 			wall,
 			breakableSurface,
 			brokenSurface,
-			door
+			/*door*/
 	};
 	
 	//Create new wall
@@ -37,10 +37,10 @@ public abstract class EntityFactory {
 		return brokenSurface;
 	}
 	
-	//Create new door
+	/*//Create new door
 	public static Entity createDoor() {
 		return door;
-	}
+	}*/
 	
 	public static Entity getFromFileSymbol(final char fileSymbol) {
 		for (final Entity motionlessElement : entity) {

@@ -9,7 +9,7 @@ import entity.IEntity;
  */
 public abstract class Entity implements IEntity{
 	//Sprite
-	private Sprite sprite;
+	protected Sprite sprite;
 	
 	//Permability
 	private Permeability permability;

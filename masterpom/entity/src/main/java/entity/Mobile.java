@@ -105,9 +105,9 @@ public void moveUp() {
  }
  
  public boolean isCrashed() {
-  for (IMobile mobEntity: this.getMap().getmobEntity()) {
-   if (mobEntity.getSprite().getConsoleImage() == 'O' || mobEntity.getSprite().getConsoleImage() == 'V') {
-    if (mobEntity.getPosition().x == this.getPosition().x && mobEntity.getPosition().y == this.getPosition().y - 1 && mobEntity.isFalling()) {
+  for (IMobile Pawns: this.getMap().getPawns()) {
+   if (Pawns.getSprite().getConsoleImage() == 'O' || Pawns.getSprite().getConsoleImage() == 'V') {
+    if (Pawns.getPosition().x == this.getPosition().x && Pawns.getPosition().y == this.getPosition().y - 1 && Pawns.isFalling()) {
      return true;
     }
    }
@@ -115,10 +115,10 @@ public void moveUp() {
   return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.BLOCKING;
  }
  
- public void remove()  {
+ /*public void remove()  {
   this.setPosition(new Point(-1, 1));
-  this.getMap().getmobEntity().remove(this);
-  }
+  this.getMap().getpawns().remove(this);
+  }*/
  
  public boolean canMove(UserOrder choice) {
   return this.mapAllowsMovementTo(choice)&&this.entityAllowsMovementTo(choice);
@@ -144,7 +144,7 @@ public void moveUp() {
  
   protected Boolean entityAllowsMovementTo(final UserOrder choice) {
    Point choicePosition = this.getPositionFromUserOrder(choice);
-   for (IMobile mobEntity : this.getMap().getmobEntity()) {
+   for (IMobile mobEntity : this.getMap().getPawns()) {
     if (mobEntity.getPosition().equals(choicePosition)) {
      if (mobEntity.getPermeability() != Permeability.PENETRABLE) {
       return false;

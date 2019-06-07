@@ -6,16 +6,23 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import entity.Diamond;
 import entity.Entity;
+import entity.EntityFactory;
+import entity.IEntity;
+import entity.IMap;
 import entity.Map;
+import entity.Rock;
 
 
 /* The Class DAOMap.
  *
  * @author Jean-Aymeric Diet
  */
-class DAOMap extends DAOEntity {
-	
+class DAOMap  {
+	private static int x = 0;
+	private static int y = 0;
+	private final Connection connection;
     /* Instantiates a new DAO hello world.
      *
      * @param connection
@@ -24,7 +31,7 @@ class DAOMap extends DAOEntity {
      *           the SQL exception
      */
     public DAOMap(Connection connection) throws SQLException {
-        super(connection);
+        this.connection = connection;
     }
     
     /* (non-Javadoc)
@@ -33,19 +40,21 @@ class DAOMap extends DAOEntity {
      */
    
     ResultSet resultSet;
-    public int map_number = 1;
-    public Map find(final int id) 
+  
+    public static IMap find( int id) 
     {
-       
+       IMap map = null;
 
         try {
-            final String sql = "SELECT map FROM map WHERE id ="+ map_number ;
-            final CallableStatement call = this.getConnection().prepareCall(sql);
+            final String sql = "SELECT map FROM map WHERE id ="+ id ;
+            final CallableStatement call = prepareCall(sql);
             call.execute();
-            if (resultSet.next()) 
+            final ResultSet resultSet = call.getResultSet();
+            if (resultSet.first()) 
             {
                 try {
-					this.Switch(resultSet);
+					map = Switch(resultSet);
+					return map;
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -57,37 +66,32 @@ class DAOMap extends DAOEntity {
         return null;
     }
     
-    public void Switch(ResultSet rs) throws SQLException, IOException 
+    public static  IMap Switch(ResultSet rs) throws SQLException, IOException 
 	{	 
-	  System.out.println("testrzpg,");
-	 
+	  IMap map = new Map(50, 40, new IEntity[50][40]);
+	  
 	  for (char c : rs.getString("map").toCharArray())
 	  {
-		  System.out.println(c);
-		  if (c == 'a') 
-		  {
-
-
+		  if (x == 50) {
+			  x = 0;
+			  y++;
 		  }
-		  
+		  map.setOnTheMapXY1(x, y, EntityFactory.getFromFileSymbol(c));
+		  if (c == 'd') {
+			  map.addPawn(new Diamond(x, y, map));
+		  }
+		  else if (c == 'c') {
+			  map.addPawn(new Rock(x, y, map));
+		  }
+		  x++;
 	  }
+	  return map;
+	}
+    
+    public static CallableStatement prepareCall(final String query) throws SQLException {
+		return DBConnection.getInstance().getConnection().prepareCall(query);
 	}
 
-    
-	@Override
-	public boolean create(Entity entity) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public boolean delete(Entity entity) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	@Override
-	public boolean update(Entity entity) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+  
     
     }

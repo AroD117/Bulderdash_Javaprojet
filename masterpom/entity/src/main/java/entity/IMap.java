@@ -35,7 +35,7 @@ public interface IMap {
 	 * @param y The y.
 	 * @return the x and y 
 	 */
-	public IEntity getOnTheMapXY(int x, int y);
+	public IEntity getOnTheMapXY1(int x, int y);
 	
 	
 	/**
@@ -45,7 +45,7 @@ public interface IMap {
      * @param y The y.
      * @param elem The element to place.
      */
-	public void setOnTheMapXY(int x, int y, IEntity elem);
+	public void setOnTheMapXY1(int x, int y, IEntity elem);
 	
 	/** Notifies that the mobile has changed */
 	public void setMobileHasChanged();
@@ -57,10 +57,10 @@ public interface IMap {
 	 * Adds a pawn on the map.
 	 * @param pawn The pawn to add.
 	 */
-	public void addPawn(final IMobile pawn);
+	public void addPawn(final Mobile pawn);
 	
 	/** @return The pawns on the current map */
-	public ArrayList<IMobile> getPawns();
+	public ArrayList<Mobile> getPawns();
 	
 	/** Decrements the diamond count */
 	public void decreaseDiamondCount();

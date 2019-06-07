@@ -28,7 +28,7 @@ public class Sprite {
     
     //Load image
     public final void loadImage() throws IOException {
-        this.setImage(ImageIO.read(new File("images/" + this.getImageName())));
+        this.setImage(ImageIO.read(new File("D:\\Exia\\1er_année\\Projet\\Projet5java(BoulberDash)\\Sprites\\image\\" + this.getImageName())));
     }
     
     //Getter for image

@@ -4,6 +4,7 @@ import java.util.Observable;
 
 import entity.IMap;
 import entity.IMobile;
+import entity.Mobile;
 
 /**
  * The Interface IModel.
@@ -16,7 +17,8 @@ public interface IModel {
 	public IMap getMap();
 
 	//Gets the character
-	public IMobile getMyCharacter();
+	public IMobile getCharacter() ;
+	public void setCharacter(IMobile character) ;
 
 	/**
 	 * Gets the observable.

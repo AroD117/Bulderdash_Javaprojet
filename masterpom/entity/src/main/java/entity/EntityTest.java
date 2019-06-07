@@ -37,16 +37,15 @@ private Sprite sprite;
   /**
    * We create a non-null size new sprite
    * @throws Exception
-   */
+   *
 
   @Before
-
   public void setUp() throws Exception {
 
     sprite =new Sprite(//'char', //'image');
 
   }
-
+/
 
 
   @After

@@ -13,7 +13,7 @@ public Rock(final int x, final int y, final IMap map) throws IOException {
  // TODO Auto-generated constructor stub
 }
 
-private static  final Sprite sprite = new Sprite('C', "Rock1");
+private static  final Sprite sprite = new Sprite('c', "rock1.png");
 
 
 @Override

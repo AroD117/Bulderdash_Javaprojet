@@ -197,6 +197,12 @@ public class BoardFrame extends JFrame implements IBoard {
         this.getBoardPanel().setHeightLooped(heightLooped);
     }
 
+	@Override
+	public void addSquare(ISquare square, int x, int y) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 	

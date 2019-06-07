@@ -1,9 +1,15 @@
 package model;
+import java.io.IOException;
+import java.sql.SQLException;
 //salut
 import java.util.Observable;
 import contract.IModel;
+import entity.IMap;
 import entity.IMobile;
 import entity.Map;
+import entity.Mobile;
+import entity.Character;
+import entity.IEntity;
 
 /*
  * The Class Model.
@@ -13,13 +19,28 @@ import entity.Map;
 public final class Model extends Observable implements IModel {
 
 	/** The helloWorld. */
-	private Map map;
+	private IMap map;
+	private IMobile character;
+	private DAOMap dao;
+
+	public IMobile getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(IMobile character2) {
+		this.character = character2;
+	}
 
 	/*
 	 * Instantiates a new model.
 	 */
-	public Model() {
-		this.map = new Map(0, null, null);
+	public void setMap(IMap map) {
+		this.map = map;
+	}
+
+	public Model() throws SQLException, IOException {
+		this.setMap(DAOMap.find(2));
+		this.setCharacter(new Character(2, 2, this.map));
 	}
 
 	/*
@@ -33,9 +54,6 @@ public final class Model extends Observable implements IModel {
 	 *
 	 * @see contract.IModel#getMessage()
 	 */
-	public Map getHelloWorld() {
-		return this.map;
-	}
 
 	/**
      * Gets the observable.
@@ -52,10 +70,11 @@ public final class Model extends Observable implements IModel {
 	}
 
 
+
 	@Override
-	public IMobile getMyCharacter() {
+	public IMap getMap() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.map;
 	}
 
 }

@@ -3,6 +3,7 @@ package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * The Class DBConnection.
@@ -16,6 +17,15 @@ final class DBConnection {
 	/** The connection. */
 	private Connection					connection;
 
+	private Statement statement;
+	/** The login. */
+    private static String                  user     = "root";
+
+    /** The password. */
+    private static String                  password = "";
+   
+    /** The url. */
+    private static String                  url      ="jdbc:mysql://localhost/bdd_projet_java?autoReconnect=true&useSSL=false";
 	/**
 	 * Instantiates a new DB connection.
 	 */
@@ -41,16 +51,30 @@ final class DBConnection {
 	 * @return the boolean
 	 */
 	private Boolean open() {
-		final DBProperties dbProperties = new DBProperties();
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			this.connection = DriverManager.getConnection(dbProperties.getUrl(), dbProperties.getLogin(), dbProperties.getPassword());
+			this.connection = DriverManager.getConnection(DBConnection.url, DBConnection.user, DBConnection.password);
+			this.statement = this.connection.createStatement();
+			return true;
 		} catch (final ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (final SQLException e) {
 			e.printStackTrace();
 		}
-		return true;
+		return false;
+	}
+
+	public Statement getStatement() {
+		return statement;
+	}
+
+	public void setStatement(Statement statement) {
+		this.statement = statement;
+	}
+
+	public void setConnection(Connection connection) {
+		this.connection = connection;
 	}
 
 	/**

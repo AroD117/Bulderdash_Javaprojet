@@ -4,7 +4,7 @@ import java.awt.Image;
 
 // salut
 public class BreakableSurface extends MotionLess{
-	private static final String imageName ="";
+	private static final String imageName ="surface1.png";
 	private static final Sprite sprite1 = new Sprite('b', imageName);
 	
 	//Sprite for breakable surface for each map

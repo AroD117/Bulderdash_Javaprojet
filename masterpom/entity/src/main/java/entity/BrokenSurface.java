@@ -6,8 +6,8 @@ import java.awt.Image;
 
 public class BrokenSurface extends MotionLess{
 	
-	private static final String imageName ="";
-	private static final Sprite sprite1 = new Sprite('b', imageName);
+	private static final String imageName ="surface2.png";
+	private static final Sprite sprite1 = new Sprite('f', imageName);
 	
 	//Sprite for broken surface
 	//private static final Sprite sprite = new Sprite('f', imageName)

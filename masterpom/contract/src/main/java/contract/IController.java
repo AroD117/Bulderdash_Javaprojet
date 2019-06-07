@@ -1,5 +1,7 @@
 package contract;
 
+import entity.UserOrder;
+
 /**
  * The Interface IController.
  *
@@ -18,5 +20,5 @@ public interface IController {
 	 * @param controllerOrder
 	 *          the controller order
 	 */
-	public void orderPerform(ControllerOrder controllerOrder);
+	public void orderPerform(UserOrder userorder) throws InterruptedException;
 }

@@ -112,7 +112,7 @@ public void moveUp() {
     }
    }
   }
-  return this.getMap().getOnTheMapXY(this.getX(), this.getY()).getPermeability() == Permeability.BLOCKING;
+  return this.getMap().getOnTheMapXY1(this.getX(), this.getY()).getPermeability() == Permeability.BLOCKING;
  }
  
  /*public void remove()  {
@@ -128,13 +128,13 @@ public void moveUp() {
  protected boolean mapAllowsMovementTo(final UserOrder choice) {
   switch (choice) {
   case UP:
-   return this.getMap().getOnTheMapXY(this.getX(), this.getY() - 1).getPermeability() == Permeability.PENETRABLE;
+   return this.getMap().getOnTheMapXY1(this.getX(), this.getY() - 1).getPermeability() == Permeability.PENETRABLE;
   case DOWN:
-   return this.getMap().getOnTheMapXY(this.getX(), this.getY() + 1).getPermeability() == Permeability.PENETRABLE;
+   return this.getMap().getOnTheMapXY1(this.getX(), this.getY() + 1).getPermeability() == Permeability.PENETRABLE;
   case RIGHT:
-   return this.getMap().getOnTheMapXY(this.getX() + 1, this.getY()).getPermeability() == Permeability.PENETRABLE;
+   return this.getMap().getOnTheMapXY1(this.getX() + 1, this.getY()).getPermeability() == Permeability.PENETRABLE;
   case LEFT:
-   return this.getMap().getOnTheMapXY(this.getX() - 1, this.getY()).getPermeability() == Permeability.PENETRABLE;
+   return this.getMap().getOnTheMapXY1(this.getX() - 1, this.getY()).getPermeability() == Permeability.PENETRABLE;
   case NOP:
   default:
    return true;
@@ -182,9 +182,9 @@ public void moveUp() {
   }*/
   
   public void digg() {
-   this.getMap().setOnTheMapXY(this.getX(), this.getY(),EntityFactory.createBrokenSurface());
+   this.getMap().setOnTheMapXY1(this.getX(), this.getY(),EntityFactory.createBrokenSurface());
    try {
-    this.getMap().getOnTheMapXY(getX(), getY()).getSprite().loadImage();
+    this.getMap().getOnTheMapXY1(getX(), getY()).getSprite().loadImage();
    } catch (IOException e) {
     e.printStackTrace();
    }

@@ -6,7 +6,7 @@ import entity.Sprite;
 
 public interface IEntity extends ISquare{
 
-	//Gets the sprite
+		//Gets the sprite
 		Sprite getSprite();
 		
 		//Gets the permability

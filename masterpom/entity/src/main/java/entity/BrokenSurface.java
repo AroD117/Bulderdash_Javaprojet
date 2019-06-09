@@ -1,3 +1,4 @@
+
 package entity;
 
 import java.awt.Image;
@@ -6,8 +7,8 @@ import java.awt.Image;
 
 public class BrokenSurface extends MotionLess{
 	
-	private static final String imageName ="surface2.png";
-	private static final Sprite sprite1 = new Sprite('f', imageName);
+
+	private static final Sprite sprite1 = new Sprite('f', "surface2.png");
 	
 	//Sprite for broken surface
 	//private static final Sprite sprite = new Sprite('f', imageName)

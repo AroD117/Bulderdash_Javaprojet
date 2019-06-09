@@ -18,6 +18,10 @@ public class Character extends Mobile{
 	public Character(int x, int y, IMap map) throws IOException {
 		super(x, y, sprite, map, Permeability.BLOCKING);
 	}
+	
+	public void setMap(Map map) {
+		this.getMap().setMyCharacter(this);
+	}
 
 	public void moveUp() {
 		super.digg();
@@ -50,7 +54,7 @@ public class Character extends Mobile{
 		Boolean push = false;
 		switch (choice) {
 		case RIGHT:
-			push = this.getMap().getOnTheMapXY1(getX() + 2, getY()).getPermeability() == Permeability.PENETRABLE;
+			push = this.getMap().getOnTheMapXY(getX() + 2, getY()).getPermeability() == Permeability.PENETRABLE;
 			if (push) {
 				for (IMobile pawns : this.getMap().getPawns()) {
 					if (pawns.getPosition().x == getX() + 2 && pawns.getPosition().y == getY()
@@ -62,7 +66,7 @@ public class Character extends Mobile{
 			}
 			break;
 		case LEFT:
-			push = this.getMap().getOnTheMapXY1(getX() - 2, getY()).getPermeability() == Permeability.PENETRABLE;
+			push = this.getMap().getOnTheMapXY(getX() - 2, getY()).getPermeability() == Permeability.PENETRABLE;
 			if (push) {
 				for (IMobile pawns : this.getMap().getPawns()) {
 					if (pawns.getPosition().x == getX() - 2 && pawns.getPosition().y == getY()
@@ -111,13 +115,13 @@ public class Character extends Mobile{
 	public boolean mapAllowsMovementTo(final UserOrder choice) {
 		switch (choice) {
 		case UP : 
-			return this.getMap().getOnTheMapXY1(this.getX(), this.getY() - 1).getPermeability() != Permeability.BLOCKING;
+			return this.getMap().getOnTheMapXY(this.getX(), this.getY() - 1).getPermeability() != Permeability.BLOCKING;
 		case DOWN : 
-			return this.getMap().getOnTheMapXY1(this.getX(), this.getY() + 1).getPermeability() != Permeability.BLOCKING;
+			return this.getMap().getOnTheMapXY(this.getX(), this.getY() + 1).getPermeability() != Permeability.BLOCKING;
 		case RIGHT : 
-			return this.getMap().getOnTheMapXY1(this.getX()+1, this.getY()).getPermeability() != Permeability.BLOCKING;
+			return this.getMap().getOnTheMapXY(this.getX()+1, this.getY()).getPermeability() != Permeability.BLOCKING;
 		case LEFT : 
-			return this.getMap().getOnTheMapXY1(this.getX()-1, this.getY()).getPermeability() != Permeability.BLOCKING;
+			return this.getMap().getOnTheMapXY(this.getX()-1, this.getY()).getPermeability() != Permeability.BLOCKING;
 		case NOP:
 		default:
 			return true;

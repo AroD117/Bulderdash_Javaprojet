@@ -44,7 +44,6 @@ public class Map extends Observable implements IMap {
 	public Map(final int newWidth, final int newHeight, final IEntity[][] newMap) throws SQLException {
 		super();
 		this.map = newMap;
-
 		this.width = newWidth;
 		this.height = newHeight;
 		this.pawns = new ArrayList<Mobile>();
@@ -113,7 +112,7 @@ public class Map extends Observable implements IMap {
 		this.notifyObservers();
 	}
 
-	public void setOnTheMapXY1(int x, int y, IEntity elem) {
+	public void setOnTheMapXY1(int x, int y, IEntity elem, int id) {
 		this.map[x][y] = elem;
 	}
 
@@ -147,7 +146,7 @@ public class Map extends Observable implements IMap {
 		if(this.getMyCharacter().getPosition().equals(point))
 			return this.getMyCharacter().getPermeability();
 
-		return this.getOnTheMapXY1(x, y).getPermeability();
+		return this.getOnTheMapXY(x, y).getPermeability();
 	}
 
 	
@@ -181,10 +180,20 @@ public class Map extends Observable implements IMap {
 
 
 	@Override
-	public IEntity getOnTheMapXY1(int x, int y) {
+	public void setOnTheMapXY(int x, int y, IEntity elem) {
 		// TODO Auto-generated method stub
-		return null;
+		
 	}
+
+
+	@Override
+	public void addPawn(IMobile pawn) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
 
 	
 }

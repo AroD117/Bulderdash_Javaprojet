@@ -20,6 +20,8 @@ public class Sprite {
     //The is image loaded
     private boolean imageLoaded;
 
+
+
     //Default constructor
     public Sprite(final char character, final String imageName) {
         this.setConsoleImage(character);
@@ -28,7 +30,13 @@ public class Sprite {
     
     //Load image
     public final void loadImage() throws IOException {
-        this.setImage(ImageIO.read(new File("D:\\Exia\\1er_année\\Projet\\Projet5java(BoulberDash)\\Sprites\\image\\" + this.getImageName())));
+    	try {
+    		this.setImage(ImageIO.read(new File("D:\\Exia\\1er_année\\Projet\\Projet5java(BoulberDash)\\Sprites\\image\\" + this.getImageName())));
+    	}catch (IOException e){
+    		e.printStackTrace();
+    		System.out.println("nique ta mere1");
+    	}
+        
     }
     
     //Getter for image

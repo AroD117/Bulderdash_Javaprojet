@@ -30,34 +30,24 @@ public abstract class Main {
 
 
     /**
-
      * The main method.
-
      *
-
      * @param args
-
      *            the arguments
-
      * @throws IOException
-
      * 			throws something
-
      * @throws InterruptedException
-
      * 			throws something
      * @throws SQLException 
-
      */
 
     public static void main(final String[] args) throws IOException, InterruptedException, SQLException {
 
         final Model model = new Model();
-
+        //View.setMap(null);
         final View view = new View(model.getMap(), model.getMap().getMyCharacter(), model.getMap().getPawns());
-
         final Controller controller = new Controller(view, model);
-
+        
         view.setOrderPerformer(controller);
 
         controller.play();

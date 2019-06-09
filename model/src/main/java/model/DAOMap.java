@@ -68,23 +68,27 @@ class DAOMap  {
     
     public static  IMap Switch(ResultSet rs) throws SQLException, IOException 
 	{	 
-	  IMap map = new Map(50, 40, new IEntity[50][40]);
+	  IMap map = new Map(50, 40, new Entity[50][40]);
 	  
-	  for (char c : rs.getString("map").toCharArray())
+	  while(rs.next()) 
 	  {
-		  if (x == 50) {
+		  for (char c : rs.getString("map").toCharArray())
+		  {
+			  if (x == 50) {
 			  x = 0;
 			  y++;
-		  }
-		  map.setOnTheMapXY1(x, y, EntityFactory.getFromFileSymbol(c));
-		  if (c == 'd') {
+			  }
+			  map.setOnTheMapXY(x, y, EntityFactory.getFromFileSymbol(c));
+		  	if (c == 'd') {
 			  map.addPawn(new Diamond(x, y, map));
-		  }
-		  else if (c == 'c') {
+		  	}
+		  	else if (c == 'c') {
 			  map.addPawn(new Rock(x, y, map));
+		  	}
+		  	x++;
 		  }
-		  x++;
 	  }
+	  
 	  return map;
 	}
     

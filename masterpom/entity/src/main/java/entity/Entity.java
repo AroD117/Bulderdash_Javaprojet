@@ -22,7 +22,7 @@ public abstract class Entity implements IEntity{
 
 	//Getter for sprite
 	public Sprite getSprite() {
-		return sprite;
+		return this.sprite;
 	}
 
 	//Setter for sprite

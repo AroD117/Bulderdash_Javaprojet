@@ -38,8 +38,9 @@ public final class Model extends Observable implements IModel {
 		this.map = map;
 	}
 
-	public Model() throws SQLException, IOException {
-		this.setMap(DAOMap.find(2));
+	public Model() throws SQLException, IOException { 
+		super();
+		this.setMap(DAOMap.find(1));
 		this.setCharacter(new Character(2, 2, this.map));
 	}
 
